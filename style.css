@@ -1,0 +1,24 @@
+
+.container{
+    display: grid;
+    grid-template-rows: 1fr 6fr 1fr;
+    gap: 4px;
+}
+
+.header {
+    background-color: darkolivegreen;
+    grid-row: 1 / 2;
+}
+
+.library {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 5fr));
+    gap: 15px;
+}
+
+.book-card {
+    height: 200px;
+    border: 2px solid darkgreen;
+    border-radius: 3%;
+    padding: 2%;
+}
