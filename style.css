@@ -8,6 +8,9 @@
 .header {
     background-color: darkolivegreen;
     grid-row: 1 / 2;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .library {
@@ -21,4 +24,36 @@
     border: 2px solid darkgreen;
     border-radius: 3%;
     padding: 2%;
+}
+
+.footer {
+    background-color: bisque;
+    justify-content: center;
+    align-content: center;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black with opacity */ 
+    align-items: center; /* Align content vertically center */
+    justify-content: center; /* Align content horizontally center */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto; /* Helps with centering */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Adjust width as necessary, or use min-width for responsiveness */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Optional: Adds shadow for card-like appearance */
+    transition: 0.3s; /* Optional: Adds a transition effect */
 }

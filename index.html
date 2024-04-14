@@ -10,6 +10,7 @@
     <div class="container">
         <div class="header">
             <h1>Your Little Library</h1>
+            <button id="add-book">Add book</button>
         </div>
 
         <div class="library"> 
@@ -24,13 +25,43 @@
                 <h3 class="book-author">Gigino</h3>
                 <h3 class="book-pages">233</he>
             </div>
-
-
         </div>
 
         <div class="footer">
             <h2>Property of Geronimo Stilton</h2>
         </div>
-    </div>   
+    </div>
+
+        <!-- Modal -->
+    <div id="bookModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Book Information</h2>
+            <form id="bookForm">
+                <div>
+                    <label for="bookTitle">Book Title:</label>
+                    <input type="text" id="bookTitle" name="bookTitle">
+                </div>
+                <div>
+                    <label for="bookAuthor">Book Author:</label>
+                    <input type="text" id="bookAuthor" name="bookAuthor">
+                </div>
+                <div>
+                    <label for="numberOfPages">Number of Pages:</label>
+                    <input type="number" id="numberOfPages" name="numberOfPages">
+                </div>
+                <div>
+                    <label for="readCheckbox">Read:</label>
+                    <input type="checkbox" id="readCheckbox" name="readCheckbox">
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script src="app.js"></script>   
 </body>
 </html>
+
+
+
