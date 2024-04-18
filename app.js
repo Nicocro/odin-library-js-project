@@ -28,10 +28,10 @@ function addBookToLibrary(event) {
     const newBook = new Book(title, author, pages, read);
 
     myLibrary.push(newBook);
-    displayBook()
+    displayBooks()
 }
 
-function displayBook() {
+function displayBooks() {
     // traverse the library array and display all the books on the page //
     const library = document.querySelector('.library');
 
@@ -41,51 +41,33 @@ function displayBook() {
         // function to create and display cards for every book in the myLibrary array //
         const bookCard  = document.createElement('div');
         bookCard.className = 'book-card';
-        bookCard.setAttribute('id',index);
-
-        const title = document.createElement('h3');
-        title.className = 'book-titile';
-        title.textContent = book.title;
-        bookCard.appendChild(title); 
-
-        const author = document.createElement('h3');
-        author.className = 'book-author';
-        author.textContent = book.author;
-        bookCard.appendChild(author);
-
-        const pages = document.createElement('h3');
-        pages.className = 'book-pages';
-        pages.textContent = book.pages;
-        bookCard.appendChild(pages);
-
-        const bookActions = document.createElement('div');
-        bookActions.className = "book-actions";
-
-        const btnDelete = document.createElement('button');
-        btnDelete.textContent = "Delete";
-        btnDelete.className = "delete-btn";
-        btnDelete.setAttribute('id', 'delete-' + index);  // Setting ID with index
-        
-
-        bookActions.appendChild(btnDelete);
-        bookCard.appendChild(bookActions);
-
+        bookCard.innerHTML = 
+        `
+        <h3 class="book-title">${book.title}</h3>
+        <h3 class="book-author">${book.author}</h3>
+        <h3 class="book-pages">${book.pages} pages</h3>
+        <div class="book-actions">
+            <button onclick="deleteBook(${index})" class="delete-btn">Delete</button>
+        </div>
+        `;
         library.appendChild(bookCard);
-    })
-
+    });
 }
 
 function deleteBook(index) {
 // function to delete a book, triggered by eventlistener // 
+    myLibrary.splice(index, 1)
+    displayBooks();
+    console.log('Book deleted at index:', index);
 }
-
 
 // Get the DOM elements I need
 const dialog = document.querySelector('dialog');
 const buttonDialog= document.querySelector('#add-book');
 const buttonClose = document.querySelector('#close');
 const bookForm = document.querySelector('#bookForm');
-const submitButton = document.querySelector('#submitButton')
+const submitButton = document.querySelector('#submitButton');
+const deleteButtons = document.querySelectorAll('.delete-btn');
 
 // here I need to grab all the delete buttons and then add an eventlistener to all those buttons that applies the delete function. //
 
@@ -106,3 +88,7 @@ submitButton.addEventListener('click', () => {
 
 // add book to library on form submission // 
 bookForm.addEventListener('submit', addBookToLibrary);
+
+// deleteButtons.forEach((button, index) => {
+//     button.addEventListener('click', () => deleteBook(index));
+// });
