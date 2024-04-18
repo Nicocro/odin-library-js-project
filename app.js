@@ -89,6 +89,3 @@ submitButton.addEventListener('click', () => {
 // add book to library on form submission // 
 bookForm.addEventListener('submit', addBookToLibrary);
 
-// deleteButtons.forEach((button, index) => {
-//     button.addEventListener('click', () => deleteBook(index));
-// });
