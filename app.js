@@ -10,9 +10,6 @@ function Book(title, author, pages, read) {
     }
 }
 
-// const ciccio = new Book("Ciccio Pasticcio", "Luigi Scurrile", 543);
-// console.log(ciccio.info());
-
 // here's what I need to do: have a button that trigger a modal dialog to enter a new boook. Listen to the button to trigger the modal.
 // show up form for the user to complete
 // register the completion into a book object
@@ -84,29 +81,28 @@ function deleteBook(index) {
 
 
 // Get the DOM elements I need
-const modal = document.querySelector('#bookModal');
-const btn = document.querySelector('#add-book');
-const xmodal = document.querySelector('.close');
+const dialog = document.querySelector('dialog');
+const buttonDialog= document.querySelector('#add-book');
+const buttonClose = document.querySelector('#close');
+const bookForm = document.querySelector('#bookForm');
+const submitButton = document.querySelector('#submitButton')
 
 // here I need to grab all the delete buttons and then add an eventlistener to all those buttons that applies the delete function. //
 
 // Open the modal on click of button //
-btn.addEventListener('click', function() {
-    modal.style.display = "flex";
+buttonDialog.addEventListener('click', () => {
+    dialog.showModal();
 });
 
-//close the modal by clicking the x //
-xmodal.addEventListener('click', function() {
-    modal.style.display = "none";
-});
+//close modal on close button click // 
+buttonClose.addEventListener('click', () => {
+    dialog.close();
+})
 
-//close the modal by clicking outside of it // 
-window.addEventListener('click', function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-});
+// close modal on submission // 
+submitButton.addEventListener('click', () => {
+    dialog.close();
+})
 
-const bookForm = document.querySelector('#bookForm');
-
+// add book to library on form submission // 
 bookForm.addEventListener('submit', addBookToLibrary);
