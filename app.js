@@ -41,17 +41,26 @@ function displayBooks() {
         // function to create and display cards for every book in the myLibrary array //
         const bookCard  = document.createElement('div');
         bookCard.className = 'book-card';
+        const isChecked = book.read ? 'checked' : ''; 
         bookCard.innerHTML = 
         `
         <h3 class="book-title">${book.title}</h3>
         <h3 class="book-author">${book.author}</h3>
         <h3 class="book-pages">${book.pages} pages</h3>
         <div class="book-actions">
+            <input type="checkbox" id="read-check-${index}" ${isChecked} onclick="toggleReadStatus(${index})">
+            <label for="read-check-${index}">Read</label>
             <button onclick="deleteBook(${index})" class="delete-btn">Delete</button>
         </div>
         `;
         library.appendChild(bookCard);
     });
+}
+
+function toggleReadStatus(index) {
+    const book = myLibrary[index]
+    book.read = !book.read;
+    displayBooks();
 }
 
 function deleteBook(index) {
@@ -67,9 +76,6 @@ const buttonDialog= document.querySelector('#add-book');
 const buttonClose = document.querySelector('#close');
 const bookForm = document.querySelector('#bookForm');
 const submitButton = document.querySelector('#submitButton');
-const deleteButtons = document.querySelectorAll('.delete-btn');
-
-// here I need to grab all the delete buttons and then add an eventlistener to all those buttons that applies the delete function. //
 
 // Open the modal on click of button //
 buttonDialog.addEventListener('click', () => {
