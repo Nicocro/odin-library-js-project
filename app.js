@@ -61,6 +61,7 @@ function toggleReadStatus(index) {
     const book = myLibrary[index]
     book.read = !book.read;
     displayBooks();
+    console.log('Book read statu changes ad index:', index);
 }
 
 function deleteBook(index) {
