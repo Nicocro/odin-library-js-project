@@ -1,4 +1,3 @@
-const myLibrary = [];
 class Book {
     constructor(title, author, pages, read) {
         this.title = title;
@@ -43,12 +42,12 @@ class Library {
 class UIController {
     constructor(library) {
         this.library = library;
+        this.libraryContainer = document.querySelector('.library');
     }
 
     displayBooks() {
         // display all books in the library as cards in the HTML//
-        const libraryContainer = document.querySelector('.library');
-        libraryContainer.innerHTML = '';
+        this.libraryContainer.innerHTML = '';
     
         this.library.getAllBooks().forEach((book, index) => {
             const bookCard  = document.createElement('div');
@@ -60,12 +59,12 @@ class UIController {
             <h3 class="book-author">${book.author}</h3>
             <h3 class="book-pages">${book.pages} pages</h3>
             <div class="book-actions">
-                <input type="checkbox" id="read-check-${index}" ${isChecked} onclick="toggleReadStatus(${index})">
+            <input type="checkbox" class="read-check" data-index="${index}" ${isChecked}>
                 <label for="read-check-${index}">Read</label>
-                <button onclick="deleteBook(${index})" class="delete-btn">Delete</button>
+                <button class="delete-btn" data-index="${index}">Delete</button>
             </div>
             `;
-            libraryContainer.appendChild(bookCard);
+            this.libraryContainer.appendChild(bookCard);
         });
     }
 
@@ -101,21 +100,27 @@ class UIController {
         const bookForm = document.querySelector('#bookForm');
         const submitButton = document.querySelector('#submitButton');
 
-        // Open the modal on click of button //
-        buttonDialog.addEventListener('click', () => {
-            dialog.showModal();
+        this.libraryContainer.addEventListener('click', event => {
+            const target = event.target;
+            const index = target.dataset.index; // Extract index from dataset
+
+            // Toggle read status
+            if (target.classList.contains('read-check')) {
+                this.toggleReadStatus(index);
+            }
+
+            // Delete book
+            else if (target.classList.contains('delete-btn')) {
+                this.deleteBook(index);
+            }
         });
 
+        // Open the modal on click of button //
+        buttonDialog.addEventListener('click', () => dialog.showModal());
         //close modal on close button click // 
-        buttonClose.addEventListener('click', () => {
-            dialog.close();
-        })
-
+        buttonClose.addEventListener('click', () => dialog.close());
         // close modal on submission // 
-        submitButton.addEventListener('click', () => {
-            dialog.close();
-        })
-
+        submitButton.addEventListener('click', () => dialog.close());
         // add book to library on form submission // 
         bookForm.addEventListener('submit', (event) => {
             this.addBook(event);
@@ -124,4 +129,8 @@ class UIController {
     }
 }
 
+// instantiate the library and UI classes /
+const myLibrary = new Library();
+const libraryUI = new UIController(myLibrary);
 
+libraryUI.initializeEventListeners();
