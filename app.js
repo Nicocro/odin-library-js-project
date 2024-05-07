@@ -1,15 +1,39 @@
 const myLibrary = [];
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;  
-    this.pages = pages;
-    this.read = read;
-    this.info = function() {
-        return `${title} by ${author}, ${pages} pages`;  
+    toggleReadStatus() {
+        this.read = !this.read;
     }
 }
 
+class Library {
+    constructor (books = []) {
+        this.books = books;
+    }
+
+    addBook(book) {
+        this.books.push(book)
+    }
+
+    deleteBook(index) {
+        if (index >= 0 && index < this.books.length) {
+            this.books.splice(index, 1);
+        }
+    }
+
+    toggleReadStatus(index) {
+        if (index >= 0 && index < this.books.length) {
+            this.books[index].toggleReadStatus();
+            console.log('Book read status changes ad index:', index);
+        }  
+    }
+}
 // here's what I need to do: have a button that trigger a modal dialog to enter a new boook. Listen to the button to trigger the modal.
 // show up form for the user to complete
 // register the completion into a book object
@@ -61,7 +85,7 @@ function toggleReadStatus(index) {
     const book = myLibrary[index]
     book.read = !book.read;
     displayBooks();
-    console.log('Book read statu changes ad index:', index);
+    console.log('Book read status changes ad index:', index);
 }
 
 function deleteBook(index) {
